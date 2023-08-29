@@ -1,3 +1,5 @@
+import 'package:aplicativo_lista/entidades/tarefa.dart';
+import 'package:aplicativo_lista/widgets/itemlista.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -10,7 +12,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   TextEditingController textTarefasController = TextEditingController();
 
-  List<String> tarefas = [];
+  List<Tarefa> tarefas = [];
   int quantidadeTarefas = 0;
 
   @override
@@ -52,13 +54,9 @@ class _HomeState extends State<Home> {
               child: ListView(
                 shrinkWrap: false,
                 children: [
-                  for (String tarefa in tarefas)
-                    ListTile(
-                      title: Text(tarefa),
-                      subtitle: Text('28/08/2023'),
-                      onTap: () {
-                        print('tarefa 1');
-                      },
+                  for (Tarefa tarefa in tarefas)
+                    ItemLista(
+                      titulo: tarefa.getNomeTarefa(),
                     ),
                 ],
               ),
@@ -86,7 +84,7 @@ class _HomeState extends State<Home> {
 
   void addTarefa() {
     setState(() {
-      tarefas.add(textTarefasController.text);
+      tarefas.add(Tarefa(nomeTarefa: textTarefasController.text, dataTarefa: '2023-08-29'));
       quantidadeTarefas = tarefas.length;
     });
     textTarefasController.clear();
