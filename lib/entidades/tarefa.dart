@@ -5,10 +5,10 @@ class Tarefa {
   Tarefa({required this.nomeTarefa, required this.dataTarefa});
 
   String getNomeTarefa() {
-    return (this.nomeTarefa);
+    return (nomeTarefa);
   }
 
   DateTime getDataTarefa() {
-    return (this.dataTarefa);
+    return (dataTarefa);
   }
 }

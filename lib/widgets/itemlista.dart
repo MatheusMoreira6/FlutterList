@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ItemLista extends StatelessWidget {
-  const ItemLista({super.key, required this.titulo});
+  const ItemLista({super.key, required this.titulo, required this.data});
 
   final String titulo;
+  final DateTime data;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,9 @@ class ItemLista extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "29/08/2023",
-              style: TextStyle(
+            Text(
+              data.toString(),
+              style: const TextStyle(
                 fontSize: 14,
               ),
             ),

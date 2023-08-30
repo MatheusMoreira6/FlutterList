@@ -19,7 +19,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.only(
+          top: 30,
+          right: 20,
+          bottom: 20,
+          left: 20,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -57,6 +62,7 @@ class _HomeState extends State<Home> {
                   for (Tarefa tarefa in tarefas)
                     ItemLista(
                       titulo: tarefa.getNomeTarefa(),
+                      data: tarefa.getDataTarefa(),
                     ),
                 ],
               ),
@@ -84,9 +90,11 @@ class _HomeState extends State<Home> {
 
   void addTarefa() {
     setState(() {
-      tarefas.add(Tarefa(nomeTarefa: textTarefasController.text, dataTarefa: '2023-08-29'));
+      tarefas.add(Tarefa(
+          nomeTarefa: textTarefasController.text, dataTarefa: DateTime.now()));
       quantidadeTarefas = tarefas.length;
     });
+
     textTarefasController.clear();
   }
 
