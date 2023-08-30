@@ -62,8 +62,7 @@ class _HomeState extends State<Home> {
                   children: [
                     for (Tarefa tarefa in tarefas)
                       ItemLista(
-                        titulo: tarefa.getNomeTarefa(),
-                        data: tarefa.getDataTarefa(),
+                        tarefa: tarefa,
                       ),
                   ],
                 ),

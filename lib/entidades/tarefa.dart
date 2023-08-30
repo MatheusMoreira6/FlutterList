@@ -1,8 +1,9 @@
 class Tarefa {
-  String nomeTarefa;
-  DateTime dataTarefa;
 
   Tarefa({required this.nomeTarefa, required this.dataTarefa});
+
+  String nomeTarefa;
+  DateTime dataTarefa;
 
   String getNomeTarefa() {
     return (nomeTarefa);
