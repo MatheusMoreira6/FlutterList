@@ -13,76 +13,84 @@ class _HomeState extends State<Home> {
   TextEditingController textTarefasController = TextEditingController();
 
   List<Tarefa> tarefas = [];
-  int quantidadeTarefas = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(
-          top: 30,
-          right: 20,
-          bottom: 20,
-          left: 20,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Adicione uma Tarefa',
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 15,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Adicione uma Tarefa',
+                        ),
+                        controller: textTarefasController,
+                      ),
                     ),
-                    controller: textTarefasController,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  onPressed: addTarefa,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.all(14),
-                  ),
-                  child: const Icon(
-                    Icons.add,
-                    size: 30,
-                  ),
-                ),
-              ],
-            ),
-            Flexible(
-              child: ListView(
-                shrinkWrap: false,
-                children: [
-                  for (Tarefa tarefa in tarefas)
-                    ItemLista(
-                      titulo: tarefa.getNomeTarefa(),
-                      data: tarefa.getDataTarefa(),
+                    const SizedBox(
+                      width: 10,
                     ),
-                ],
+                    ElevatedButton(
+                      onPressed: addTarefa,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.all(14),
+                      ),
+                      child: const Icon(
+                        Icons.add,
+                        size: 30,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child:
-                      Text('Você possui $quantidadeTarefas tarefas pendentes'),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: false,
+                  children: [
+                    for (Tarefa tarefa in tarefas)
+                      ItemLista(
+                        titulo: tarefa.getNomeTarefa(),
+                        data: tarefa.getDataTarefa(),
+                      ),
+                  ],
                 ),
-                const SizedBox(
-                  width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Você possui ${tarefas.length} tarefas pendentes',
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: clearTarefa,
+                      child: const Text(
+                        'Limpar Tudo',
+                      ),
+                    ),
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: clearTarefa,
-                  child: const Text('Limpar Tudo'),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -90,9 +98,12 @@ class _HomeState extends State<Home> {
 
   void addTarefa() {
     setState(() {
-      tarefas.add(Tarefa(
-          nomeTarefa: textTarefasController.text, dataTarefa: DateTime.now()));
-      quantidadeTarefas = tarefas.length;
+      tarefas.add(
+        Tarefa(
+          nomeTarefa: textTarefasController.text,
+          dataTarefa: DateTime.now(),
+        ),
+      );
     });
 
     textTarefasController.clear();
@@ -101,7 +112,6 @@ class _HomeState extends State<Home> {
   void clearTarefa() {
     setState(() {
       tarefas.clear();
-      quantidadeTarefas = tarefas.length;
     });
   }
 }
