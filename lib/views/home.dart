@@ -109,10 +109,34 @@ class _HomeState extends State<Home> {
     textTarefasController.clear();
   }
 
-  void deletarTarefa(Tarefa tarefa){
+  void deletarTarefa(Tarefa tarefa) {
     setState(() {
       tarefas.remove(tarefa);
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Tarefa ${tarefa.getNomeTarefa()} foi removida com sucesso',
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        action: SnackBarAction(
+          label: 'Desfazer',
+          textColor: Colors.white,
+          backgroundColor: Colors.deepOrange,
+          onPressed: () {
+            setState(() {
+              tarefas.add(tarefa);
+            });
+          },
+        ),
+      ),
+    );
   }
 
   void clearTarefa() {
