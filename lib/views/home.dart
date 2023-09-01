@@ -63,6 +63,7 @@ class _HomeState extends State<Home> {
                     for (Tarefa tarefa in tarefas)
                       ItemLista(
                         tarefa: tarefa,
+                        deletarTarefa: deletarTarefa,
                       ),
                   ],
                 ),
@@ -106,6 +107,12 @@ class _HomeState extends State<Home> {
     });
 
     textTarefasController.clear();
+  }
+
+  void deletarTarefa(Tarefa tarefa){
+    setState(() {
+      tarefas.remove(tarefa);
+    });
   }
 
   void clearTarefa() {
